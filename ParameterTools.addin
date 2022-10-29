@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>ParameterTools</Name>
+		<Assembly>bin\Debug\ParameterTools.dll</Assembly>
+		<AddInId>B5AA5145-BBB2-4EC4-A39D-CA84A6D8FA6C</AddInId>
+		<FullClassName>ParameterTools.ParameterToolsApplication</FullClassName>
+		<VendorId>Sergey Nefyodov</VendorId>
+	</AddIn>
+</RevitAddIns>

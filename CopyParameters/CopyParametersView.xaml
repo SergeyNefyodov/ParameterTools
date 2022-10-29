@@ -1,0 +1,82 @@
+﻿<Window
+    x:Class="ParameterTools.CopyParameters.CopyParametersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ParameterTools"
+             mc:Ignorable="d" 
+             Height="550" Width="700" MinHeight="500" MinWidth="600" WindowStyle="ToolWindow"
+             Title="Копирование значение общих параметров во вложенные семейства и изоляцию" 
+             WindowStartupLocation="CenterScreen" Background="#FF40474A">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle">
+            <Setter Property="Button.FontSize" Value="12"/>
+            <Setter Property="Button.Background" Value="#FFCBCEF3"/>
+            <Setter Property="Button.Foreground" Value="Black"/>
+            <Setter Property="Button.Margin" Value="10,0"/>
+            <Setter Property="Button.Padding" Value="5"/>
+            <Setter Property="Button.Height" Value="Auto"/>
+            <Setter Property="Button.Width" Value="Auto"/>
+            <Setter Property="Button.HorizontalAlignment" Value="Center"/>
+            <Setter Property="Button.VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="VertStack">
+            <Setter Property="StackPanel.HorizontalAlignment" Value="Center"/>
+            <Setter Property="StackPanel.VerticalAlignment" Value="Top"/>
+            <Setter Property="StackPanel.Margin" Value="20"/>
+            <Setter Property="StackPanel.Height" Value="Auto"/>
+            <Setter Property="StackPanel.AllowDrop" Value="True"/>
+        </Style>
+        <Style x:Key="HorStack">
+            <Setter Property="StackPanel.HorizontalAlignment" Value="Center"/>
+            <Setter Property="StackPanel.VerticalAlignment" Value="Center"/>
+            <Setter Property="StackPanel.Orientation" Value="Horizontal"/>
+            <Setter Property="StackPanel.Margin" Value="10"/>
+            <Setter Property="StackPanel.Height" Value="Auto"/>
+            <Setter Property="StackPanel.AllowDrop" Value="True"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FFADADB8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Name ="categoriesStack" Background="#FFCBCEF3" Margin="10,20" >
+        </StackPanel>
+        <StackPanel Style="{StaticResource HorStack}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" >
+            <Button Content ="_Запуск" Style ="{StaticResource ButtonStyle}" Click="ButtonRun_Click" Command="{Binding MainCommand}" />
+            <Button  Content="_Отмена" Style ="{StaticResource ButtonStyle}" Click="ButtonCancel_Click"/>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource HorStack}" >
+            <Button Content="_Скрыть невыбранные" Style ="{StaticResource ButtonStyle}" Click="ButtonHide_Click"/>
+            <Button Content="_Показать все" Style ="{StaticResource ButtonStyle}" Click="ButtonShow_Click" />
+            <Button Content="_Выделить все" Style ="{StaticResource ButtonStyle}" Click="ButtonSelectAll_Click" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource HorStack}" Grid.Column="1">
+            <Button Content="Добавить параметр" Style ="{StaticResource ButtonStyle}" Click="ButtonAddParam_Click" />
+            <Button Content="Удалить параметр" Style ="{StaticResource ButtonStyle}" Click="ButtonDeleteParam_Click" />
+        </StackPanel>
+
+        <StackPanel x:Name="Parameters" Style="{StaticResource VertStack}" Grid.Row="1" Grid.Column="1">
+            <ComboBox x:Name="comboBox0" Margin="20,5" ItemsSource="{Binding allParametersList}" 
+                      SelectedItem="{Binding selectedParametersList[0]}" DisplayMemberPath="Name" MinWidth="200" Width="Auto"/>
+        </StackPanel>
+        <TextBox Background="#FFCBCEF3" Height="Auto" Margin="5" Grid.Row="2" TextWrapping="Wrap" 
+        VerticalAlignment="Center" HorizontalAlignment="Center" Width="Auto">
+            <TextBox.Text>
+                Приложение попытается скопировать выбранные общие параметры для всех элементов выбранных категорий.
+        Копирование будет просходить в общие вложенные или в изоляцию, или и туда, и туда, при наличии соответствующих элементов 
+        и соответствующих общих параметров в них.
+            </TextBox.Text>
+        </TextBox>
+    </Grid>
+</Window>
+
